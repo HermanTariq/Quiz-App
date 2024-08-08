@@ -27,16 +27,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.75,
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: Image.asset('assets/images/quiz-logo.png')),
+                    child: Image.asset(
+                      'assets/images/quiz-logo.png',
+                      color: Colors.transparent,
+                    )),
               )),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Start Quiz',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )),
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  label: const Text(
+                    'Start Quiz',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  icon: const Icon(
+                    Icons.arrow_outward_rounded,
+                  ),
+                ),
               )
             ],
           )),
