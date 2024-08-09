@@ -10,18 +10,11 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  Widget? activescreen;
-  @override
-  void initState() {
-    activescreen = MyHomePage(
-      startQuiz: switchScreen,
-    );
-    super.initState();
-  }
+  var activescreen = "Start-Screen";
 
   void switchScreen() {
     setState(() {
-      activescreen = const Quesstion();
+      activescreen = "Question-screen";
     });
   }
 
@@ -36,7 +29,9 @@ class _MyWidgetState extends State<MyWidget> {
         ),
         useMaterial3: true,
       ),
-      home: activescreen,
+      home: activescreen == "Start-Screen"
+          ? MyHomePage(startQuiz: switchScreen)
+          : const Quesstion(),
     );
   }
 }
