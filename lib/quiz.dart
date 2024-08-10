@@ -20,6 +20,13 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Widget screenwidget = MyHomePage(
+      startQuiz: switchScreen,
+    );
+    if (activescreen == "Question-screen") {
+      screenwidget = Quesstion();
+    }
+
     return MaterialApp(
       title: 'My Quiz App',
       debugShowCheckedModeBanner: false,
@@ -29,9 +36,7 @@ class _MyWidgetState extends State<MyWidget> {
         ),
         useMaterial3: true,
       ),
-      home: activescreen == "Start-Screen"
-          ? MyHomePage(startQuiz: switchScreen)
-          : const Quesstion(),
+      home: screenwidget,
     );
   }
 }
