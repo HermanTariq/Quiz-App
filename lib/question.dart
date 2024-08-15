@@ -3,15 +3,26 @@ import 'package:quiz_app/answerbutton.dart';
 import 'package:quiz_app/data/questiondata.dart';
 
 class Quesstion extends StatefulWidget {
-  const Quesstion({super.key});
+  const Quesstion({super.key, required this.onSelectanswer});
+
+  final void Function(String answer) onSelectanswer;
+
   @override
   State<Quesstion> createState() => _QuesstionState();
 }
 
 class _QuesstionState extends State<Quesstion> {
+  var currrentindex = 0;
+  void answerQuestion(selectedanswer) {
+    widget.onSelectanswer(selectedanswer);
+    setState(() {
+      currrentindex = currrentindex + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[0];
+    final currentQuestion = questions[currrentindex];
     return Center(
         child: Container(
       color: const Color.fromARGB(255, 160, 104, 255),
@@ -30,11 +41,15 @@ class _QuesstionState extends State<Quesstion> {
                   fontStyle: FontStyle.normal,
                   decoration: TextDecoration.none),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            ...currentQuestion.questionanswer.map((answer) {
-              return AnswerButton(answer: answer, answerbuttonaction: () {});
+            ...currentQuestion.getshuflledanswer().map((answer) {
+              return AnswerButton(
+                  answer: answer,
+                  answerbuttonaction: () {
+                    answerQuestion(answer);
+                  });
             })
           ],
         ),
